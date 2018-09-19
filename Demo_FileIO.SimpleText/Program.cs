@@ -11,11 +11,11 @@ namespace Demo_FileIO
     {
         static void Main(string[] args)
         {
-            string textFilePath = "Data\\Data.txt";
+            string textFilePath = @"Data\Data.txt";
 
-            //SimpleTextReadWrite(textFilePath);
+            SimpleTextReadWrite(textFilePath);
             //StructuredTextReadWrite(textFilePath);
-            FileStreamReadWrite(textFilePath);
+            //FileStreamReadWrite(textFilePath);
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
