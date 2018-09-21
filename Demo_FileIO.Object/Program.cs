@@ -156,7 +156,7 @@ namespace Demo_FileIO
                         Zip = properties[6],
                         Age = Convert.ToInt32(properties[7]),
                         Gender = (Character.GenderType)Enum.Parse(typeof(Character.GenderType), properties[8])
-            });
+                        });
             }
 
             return CharacterClassList;
