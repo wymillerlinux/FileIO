@@ -29,7 +29,15 @@ namespace Demo_FileIO
 
         public void UpdateCharacter(Character character)
         {
+            _characters.RemoveAll(c => c.Id == character.Id);
+            _characters.Add(character);
+            _dataService.WriteAll(_characters);
+        }
 
+        public void DeleteCharacter(int id)
+        {
+            _characters.RemoveAll(c => c.Id == id);
+            _dataService.WriteAll(_characters);
         }
 
         public CharactersBLL()

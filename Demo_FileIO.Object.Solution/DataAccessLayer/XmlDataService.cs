@@ -14,7 +14,7 @@ namespace Demo_FileIO
         /// read the xml file and load a list of character objects
         /// </summary>
         /// <returns>list of characters</returns>
-        public List<Character> ReadAll()
+        public IEnumerable<Character> ReadAll()
         {
             List<Character> characters = new List<Character>();
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>), new XmlRootAttribute("Characters"));
@@ -40,7 +40,7 @@ namespace Demo_FileIO
         /// write the current list of characters to the xml data file
         /// </summary>
         /// <param name="characters">list of characters</param>
-        public void WriteAll(List<Character> characters)
+        public void WriteAll(IEnumerable<Character> characters)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>), new XmlRootAttribute("Characters"));
 

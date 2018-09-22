@@ -11,23 +11,29 @@ namespace Demo_FileIO
     {
         static void Main(string[] args)
         {
+            Presenter presenter = new Presenter();
+
+
+
             IDataService dataService = new CsvDataService();
             List<Character> characters = new List<Character>();
 
             try
             {
-                characters = dataService.ReadAll();
+                CharactersBLL cBll = new CharactersBLL();
+                characters = cBll.GetCharacters() as List<Character>;
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("The file could not be found.");
+                Console.WriteLine("Unable to locate the data file.");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
 
-            characters.Add(new Character()
+
+            Character newCharacter = new Character()
             {
                 LastName = "Flintstone",
                 FirstName = "Dino",
@@ -37,13 +43,12 @@ namespace Demo_FileIO
                 Zip = "70777",
                 Age = 7,
                 Gender = Character.GenderType.FEMALE
-            });
-
-            DisplayCharacters(characters);
+            };
 
             try
             {
-                dataService.WriteAll(characters);
+                CharactersBLL cBll = new CharactersBLL();
+                cBll.AddCharacter(newCharacter);
             }
             catch (FileNotFoundException)
             {
@@ -54,6 +59,7 @@ namespace Demo_FileIO
                 Console.WriteLine(e.Message);
             }
 
+            DisplayCharacters(characters);
 
             Console.WriteLine();
             Console.WriteLine("\nPress any key to exit.");

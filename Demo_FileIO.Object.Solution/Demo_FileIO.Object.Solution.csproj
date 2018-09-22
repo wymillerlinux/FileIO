@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogicLayer\CharactersBLL.cs" />
+    <Compile Include="Models\UserAction.cs" />
+    <Compile Include="PresentationLayer\ViewSettings.cs" />
+    <Compile Include="Utilities\ConsoleUtil.cs" />
     <Compile Include="DataAccessLayer\CsvDataService.cs" />
     <Compile Include="DataAccessLayer\IDataService.cs" />
     <Compile Include="DataAccessLayer\XmlDataService.cs" />
