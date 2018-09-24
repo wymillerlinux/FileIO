@@ -56,6 +56,7 @@ namespace Demo_FileIO
                 character.Id = MaximumCurrentId() + 1;
                 _characters.Add(character);
                 _dataService.WriteAll(_characters);
+                message = "Character added.";
             }
             catch (FileNotFoundException)
             {
@@ -67,27 +68,54 @@ namespace Demo_FileIO
             }
         }
 
-        public void UpdateCharacter(Character character)
+        public void UpdateCharacter(Character character, out bool success, out string message)
         {
+            success = false;
+            message = "";
+
             _characters.RemoveAll(c => c.Id == character.Id);
             _characters.Add(character);
             _dataService.WriteAll(_characters);
         }
 
-        public void DeleteCharacter(int id)
+        public void DeleteCharacter(int id, out bool success, out string message)
         {
-            _characters.RemoveAll(c => c.Id == id);
-            _dataService.WriteAll(_characters);
-        }
+            success = false;
+            message = "";
 
-        public CharactersBLL()
-        {
-
+            if (ValidCharacterIds().Contains(id))
+            {
+                try
+                {
+                    _dataService = new CsvDataService();
+                    _characters = _dataService.ReadAll() as List<Character>;
+                    _characters.RemoveAll(c => c.Id == id);
+                    _dataService.WriteAll(_characters);
+                    message = "Character deleted.";
+                }
+                catch (FileNotFoundException)
+                {
+                    message = "Unable to locate the data file.";
+                }
+                catch (Exception e)
+                {
+                    message = e.Message;
+                }
+            }
+            else
+            {
+                message = "Invalid character Id entered.";
+            }
         }
 
         private int MaximumCurrentId()
         {
             return _characters.Max(c => c.Id);
+        }
+
+        private IEnumerable<int> ValidCharacterIds()
+        {
+            return _characters.Select(c => c.Id).Distinct();
         }
     }
 }

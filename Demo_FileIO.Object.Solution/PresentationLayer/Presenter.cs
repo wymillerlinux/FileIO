@@ -133,6 +133,7 @@ namespace Demo_FileIO
                 case UserAction.UpdateCharacter:
                     break;
                 case UserAction.DeleteCharacter:
+                    DisplayDeleteCharacter();
                     break;
                 case UserAction.QueryByAge:
                     break;
@@ -173,12 +174,13 @@ namespace Demo_FileIO
             DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// add a new character
+        /// </summary>
         private void DisplayAddCharacter()
         {
             bool success;
             string message;
-
-            DisplayReset();
 
             Character character = new Character();
 
@@ -217,7 +219,51 @@ namespace Demo_FileIO
             CharactersBLL charactersBLL = new CharactersBLL();
             charactersBLL.AddCharacter(character, out success, out message);
 
-            if (!success)
+            DisplayReset();
+
+            DisplayMessage("");
+            Console.WriteLine(ConsoleUtil.Center("Add Character", WINDOW_WIDTH));
+            DisplayMessage("");
+            DisplayMessage(message);
+
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// delete a character
+        /// </summary>
+        private void DisplayDeleteCharacter()
+        {
+            bool success;
+            string message;
+            int characterId;
+
+            CharactersBLL charactersBLL = new CharactersBLL();
+            List<Character> characters = charactersBLL.GetCharacters(out success, out message) as List<Character>;
+
+            DisplayReset();
+
+            if (success)
+            {
+                DisplayMessage("");
+                Console.WriteLine(ConsoleUtil.Center("Delete Character", WINDOW_WIDTH));
+                DisplayMessage("");
+
+                characterId = DisplayChooseCharacter("Delete", characters);
+
+                charactersBLL.DeleteCharacter(characterId, out success, out message);
+
+                if (!success)
+                {
+                    DisplayReset();
+
+                    DisplayMessage("");
+                    Console.WriteLine(ConsoleUtil.Center("Delete Character", WINDOW_WIDTH));
+                    DisplayMessage("");
+                    DisplayMessage(message);
+                }
+            }
+            else
             {
                 DisplayMessage(message);
             }
@@ -225,6 +271,71 @@ namespace Demo_FileIO
             DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// update a character
+        /// </summary>
+        private void DisplayUpdateCharacter()
+        {
+            bool success;
+            string message;
+            int characterId;
+            Character character;
+
+            CharactersBLL charactersBLL = new CharactersBLL();
+            List<Character> characters = charactersBLL.GetCharacters(out success, out message) as List<Character>;
+
+            DisplayReset();
+
+            if (success)
+            {
+                DisplayMessage("");
+                Console.WriteLine(ConsoleUtil.Center("Update Character", WINDOW_WIDTH));
+                DisplayMessage("");
+
+                characterId = DisplayChooseCharacter("Update", characters);
+
+                character = charactersBLL.GetCharacterById(characterId);
+
+                if (success)
+                {
+                    DisplayReset();
+
+                    DisplayMessage("");
+                    Console.WriteLine(ConsoleUtil.Center("Update Character", WINDOW_WIDTH));
+                    DisplayMessage("");
+
+
+                }
+            }
+            else
+            {
+                DisplayMessage(message);
+            }
+
+            DisplayContinuePrompt();
+        }
+
+        private int DisplayChooseCharacter(string function, List<Character> characters)
+        {
+            int characterId;
+
+            DisplayMessage("");
+            Console.WriteLine(ConsoleUtil.Center($"Choose Character Id to {function}", WINDOW_WIDTH));
+            DisplayMessage("");
+
+            DisplayCharacterTable(characters);
+
+            DisplayMessage("");
+
+            GetInteger("Enter Character Id:", 1, 100, out characterId);
+
+            return characterId;
+        }
+
+        /// <summary>
+        /// display a table with id and full name columns
+        /// </summary>
+        /// <param name="characters">characters</param>
         private void DisplayCharacterTable(List<Character> characters)
         {
             StringBuilder columnHeader = new StringBuilder();
@@ -245,7 +356,11 @@ namespace Demo_FileIO
             }
         }
 
-        private void DisplayCharacterDetail(Character character)
+        /// <summary>
+        /// display all character properties
+        /// </summary>
+        /// <param name="character">character</param>
+        private void DisplayCharacter(Character character)
         {
             Console.WriteLine();
             Console.WriteLine($"Id: {character.Id}");
@@ -259,10 +374,6 @@ namespace Demo_FileIO
             Console.WriteLine($"Gender: {character.Gender}");
             Console.WriteLine();
         }
-
-
-
-
 
         /// <summary>
         /// reset display to default size and colors including the header

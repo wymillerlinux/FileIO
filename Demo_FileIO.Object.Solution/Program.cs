@@ -66,22 +66,22 @@ namespace Demo_FileIO
             //Console.ReadKey();
         }
 
-        static void DisplayCharacters(List<Character> characters)
-        {
-            foreach (Character character in characters)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Id: {character.Id}");
-                Console.WriteLine($"Last Name: {character.LastName}");
-                Console.WriteLine($"First Name: {character.FirstName}");
-                Console.WriteLine($"Address: {character.Address}");
-                Console.WriteLine($"City: {character.City}");
-                Console.WriteLine($"State: {character.State}");
-                Console.WriteLine($"Zip: {character.Zip}");
-                Console.WriteLine($"Age: {character.Age}");
-                Console.WriteLine($"Gender: {character.Gender}");
-                Console.WriteLine();
-            }
-        }
+        //static void DisplayCharacters(List<Character> characters)
+        //{
+        //    foreach (Character character in characters)
+        //    {
+        //        Console.WriteLine();
+        //        Console.WriteLine($"Id: {character.Id}");
+        //        Console.WriteLine($"Last Name: {character.LastName}");
+        //        Console.WriteLine($"First Name: {character.FirstName}");
+        //        Console.WriteLine($"Address: {character.Address}");
+        //        Console.WriteLine($"City: {character.City}");
+        //        Console.WriteLine($"State: {character.State}");
+        //        Console.WriteLine($"Zip: {character.Zip}");
+        //        Console.WriteLine($"Age: {character.Age}");
+        //        Console.WriteLine($"Gender: {character.Gender}");
+        //        Console.WriteLine();
+        //    }
+        //}
     }
 }
