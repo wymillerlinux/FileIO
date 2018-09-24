@@ -52,7 +52,7 @@ namespace Demo_FileIO
                     {
                         sb.AppendLine(CharacterStringBuilder(character));
                     }
-                    sw.WriteLine(sb.ToString());
+                    sw.Write(sb.ToString());
                 }
             }
             catch (Exception)
@@ -96,7 +96,7 @@ namespace Demo_FileIO
         /// <returns>Character string</returns>
         private string CharacterStringBuilder(Character characterObject)
         {
-            const char DELINEATOR = ',';
+            const string DELINEATOR = ",";
             string characterString;
 
             characterString =

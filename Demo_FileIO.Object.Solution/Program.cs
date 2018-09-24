@@ -15,55 +15,55 @@ namespace Demo_FileIO
 
 
 
-            IDataService dataService = new CsvDataService();
-            List<Character> characters = new List<Character>();
+            //IDataService dataService = new CsvDataService();
+            //List<Character> characters = new List<Character>();
 
-            try
-            {
-                CharactersBLL cBll = new CharactersBLL();
-                characters = cBll.GetCharacters() as List<Character>;
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("Unable to locate the data file.");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //try
+            //{
+            //    CharactersBLL cBll = new CharactersBLL();
+            //    characters = cBll.GetCharacters() as List<Character>;
+            //}
+            //catch (FileNotFoundException)
+            //{
+            //    Console.WriteLine("Unable to locate the data file.");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
 
-            Character newCharacter = new Character()
-            {
-                LastName = "Flintstone",
-                FirstName = "Dino",
-                Address = "301 Cobblestone Way",
-                City = "Bedrock",
-                State = "MI",
-                Zip = "70777",
-                Age = 7,
-                Gender = Character.GenderType.FEMALE
-            };
+            //Character newCharacter = new Character()
+            //{
+            //    LastName = "Flintstone",
+            //    FirstName = "Dino",
+            //    Address = "301 Cobblestone Way",
+            //    City = "Bedrock",
+            //    State = "MI",
+            //    Zip = "70777",
+            //    Age = 7,
+            //    Gender = Character.GenderType.FEMALE
+            //};
 
-            try
-            {
-                CharactersBLL cBll = new CharactersBLL();
-                cBll.AddCharacter(newCharacter);
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("The file could not be found.");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //try
+            //{
+            //    CharactersBLL cBll = new CharactersBLL();
+            //    cBll.AddCharacter(newCharacter);
+            //}
+            //catch (FileNotFoundException)
+            //{
+            //    Console.WriteLine("The file could not be found.");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
-            DisplayCharacters(characters);
+            //DisplayCharacters(characters);
 
-            Console.WriteLine();
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            //Console.WriteLine();
+            //Console.WriteLine("\nPress any key to exit.");
+            //Console.ReadKey();
         }
 
         static void DisplayCharacters(List<Character> characters)
