@@ -92,7 +92,7 @@ namespace Demo_FileIO
             }
 
             DisplayMessage("");
-            DisplayPromptMessage("Enter the number/letter for the menu choice: ");
+            DisplayPromptMessage("Enter the number for the menu choice: ");
             ConsoleKeyInfo userResponse = Console.ReadKey(true);
 
             if (menuItems.ContainsKey(userResponse.KeyChar))
@@ -126,6 +126,7 @@ namespace Demo_FileIO
                     DisplayListOfCharacters();
                     break;
                 case UserAction.DisplayCharacterDetail:
+                    DisplayDetailOfCharacter();
                     break;
                 case UserAction.AddCharacter:
                     DisplayAddCharacter();
@@ -165,6 +166,47 @@ namespace Demo_FileIO
                 DisplayMessage("");
 
                 DisplayCharacterTable(characters);
+            }
+            else
+            {
+                DisplayMessage(message);
+            }
+
+            DisplayContinuePrompt();
+        }
+
+        private void DisplayDetailOfCharacter()
+        {
+            bool success;
+            string message;
+            int characterId;
+            Character character;
+
+            CharactersBLL charactersBLL = new CharactersBLL();
+            List<Character> characters = charactersBLL.GetCharacters(out success, out message) as List<Character>;
+
+            DisplayReset();
+
+            if (success)
+            {
+                DisplayMessage("");
+                Console.WriteLine(ConsoleUtil.Center("Detail of Character", WINDOW_WIDTH));
+                DisplayMessage("");
+
+                characterId = DisplayChooseCharacter("Detail of", characters);
+
+                character = charactersBLL.GetCharacterById(characterId, out success, out message);
+
+                if (success)
+                {
+                    DisplayReset();
+
+                    DisplayMessage("");
+                    Console.WriteLine(ConsoleUtil.Center("Delete Character", WINDOW_WIDTH));
+                    DisplayMessage("");
+
+                    DisplayCharacter(character);
+                }
             }
             else
             {
@@ -294,7 +336,7 @@ namespace Demo_FileIO
 
                 characterId = DisplayChooseCharacter("Update", characters);
 
-                character = charactersBLL.GetCharacterById(characterId);
+                character = charactersBLL.GetCharacterById(characterId, out success, out message);
 
                 if (success)
                 {
@@ -303,8 +345,6 @@ namespace Demo_FileIO
                     DisplayMessage("");
                     Console.WriteLine(ConsoleUtil.Center("Update Character", WINDOW_WIDTH));
                     DisplayMessage("");
-
-
                 }
             }
             else
@@ -315,12 +355,19 @@ namespace Demo_FileIO
             DisplayContinuePrompt();
         }
 
-        private int DisplayChooseCharacter(string function, List<Character> characters)
+        /// <summary>
+        /// display a list of character Ids and full names
+        /// allow the user to choose an Id
+        /// </summary>
+        /// <param name="action">Detail, Delete, or Update</param>
+        /// <param name="characters">list of Characters</param>
+        /// <returns></returns>
+        private int DisplayChooseCharacter(string action, List<Character> characters)
         {
             int characterId;
 
             DisplayMessage("");
-            Console.WriteLine(ConsoleUtil.Center($"Choose Character Id to {function}", WINDOW_WIDTH));
+            Console.WriteLine(ConsoleUtil.Center($"Choose Character Id to {action}", WINDOW_WIDTH));
             DisplayMessage("");
 
             DisplayCharacterTable(characters);
@@ -362,17 +409,17 @@ namespace Demo_FileIO
         /// <param name="character">character</param>
         private void DisplayCharacter(Character character)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Id: {character.Id}");
-            Console.WriteLine($"Last Name: {character.LastName}");
-            Console.WriteLine($"First Name: {character.FirstName}");
-            Console.WriteLine($"Address: {character.Address}");
-            Console.WriteLine($"City: {character.City}");
-            Console.WriteLine($"State: {character.State}");
-            Console.WriteLine($"Zip: {character.Zip}");
-            Console.WriteLine($"Age: {character.Age}");
-            Console.WriteLine($"Gender: {character.Gender}");
-            Console.WriteLine();
+            DisplayMessage("");
+            DisplayMessage($"Id: {character.Id}");
+            DisplayMessage($"Last Name: {character.LastName}");
+            DisplayMessage($"First Name: {character.FirstName}");
+            DisplayMessage($"Address: {character.Address}");
+            DisplayMessage($"City: {character.City}");
+            DisplayMessage($"State: {character.State}");
+            DisplayMessage($"Zip: {character.Zip}");
+            DisplayMessage($"Age: {character.Age}");
+            DisplayMessage($"Gender: {character.Gender}");
+            DisplayMessage("");
         }
 
         /// <summary>

@@ -40,9 +40,36 @@ namespace Demo_FileIO
             return _characters;
         }
 
-        public Character GetCharacterById(int id)
+        public Character GetCharacterById(int id, out bool success, out string message)
         {
-            return _characters.FirstOrDefault(c => c.Id == id);
+            success = false;
+            message = "";
+            Character character = new Character();
+
+            if (ValidCharacterIds().Contains(id))
+            {
+                try
+                {
+                    _dataService = new CsvDataService();
+                    _characters = _dataService.ReadAll() as List<Character>;
+                    character = _characters.FirstOrDefault(c => c.Id == id);
+                    success = true;
+                }
+                catch (FileNotFoundException)
+                {
+                    message = "Unable to locate the data file.";
+                }
+                catch (Exception e)
+                {
+                    message = e.Message;
+                }
+            }
+            else
+            {
+                message = "Invalid character Id entered.";
+            }
+
+            return character;
         }
 
         public void AddCharacter(Character character, out bool success, out string message)
@@ -56,6 +83,7 @@ namespace Demo_FileIO
                 character.Id = MaximumCurrentId() + 1;
                 _characters.Add(character);
                 _dataService.WriteAll(_characters);
+                success = true;
                 message = "Character added.";
             }
             catch (FileNotFoundException)
@@ -91,6 +119,7 @@ namespace Demo_FileIO
                     _characters = _dataService.ReadAll() as List<Character>;
                     _characters.RemoveAll(c => c.Id == id);
                     _dataService.WriteAll(_characters);
+                    success = true;
                     message = "Character deleted.";
                 }
                 catch (FileNotFoundException)
