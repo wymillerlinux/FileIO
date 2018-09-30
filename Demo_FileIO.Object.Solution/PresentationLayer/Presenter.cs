@@ -132,6 +132,7 @@ namespace Demo_FileIO
                     DisplayAddCharacter();
                     break;
                 case UserAction.UpdateCharacter:
+                    DisplayUpdateCharacter();
                     break;
                 case UserAction.DeleteCharacter:
                     DisplayDeleteCharacter();
@@ -156,6 +157,7 @@ namespace Demo_FileIO
 
             CharactersBLL charactersBLL = new CharactersBLL();
             List<Character> characters = charactersBLL.GetCharacters(out success, out message) as List<Character>;
+            characters = characters.OrderBy(c => c.Id).ToList();
 
             DisplayReset();
 
@@ -175,6 +177,9 @@ namespace Demo_FileIO
             DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// get a character id and display the details
+        /// </summary>
         private void DisplayDetailOfCharacter()
         {
             bool success;
@@ -246,8 +251,7 @@ namespace Demo_FileIO
             character.Zip = Console.ReadLine();
 
             int age;
-            GetInteger("Age:", 1, 100, out age);
-            character.Age = age;
+            character.Age = GetInteger("Age:", 1, 100, out age) ? age : 0;
 
             Character.GenderType gender;
             DisplayPromptMessage("Gender [MALE, FEMALE]:"); ;
@@ -301,14 +305,16 @@ namespace Demo_FileIO
 
                     DisplayMessage("");
                     Console.WriteLine(ConsoleUtil.Center("Delete Character", WINDOW_WIDTH));
-                    DisplayMessage("");
-                    DisplayMessage(message);
+
                 }
             }
-            else
-            {
-                DisplayMessage(message);
-            }
+
+            DisplayReset();
+
+            DisplayMessage("");
+            Console.WriteLine(ConsoleUtil.Center("Delete Character", WINDOW_WIDTH));
+            DisplayMessage("");
+            DisplayMessage(message);
 
             DisplayContinuePrompt();
         }
@@ -320,6 +326,7 @@ namespace Demo_FileIO
         {
             bool success;
             string message;
+            string userResponse;
             int characterId;
             Character character;
 
@@ -345,14 +352,61 @@ namespace Demo_FileIO
                     DisplayMessage("");
                     Console.WriteLine(ConsoleUtil.Center("Update Character", WINDOW_WIDTH));
                     DisplayMessage("");
+
+                    DisplayMessage("Type a new value or press the Enter key to keep the current value.");
+                    DisplayMessage("");
+
+                    DisplayPromptMessage($"Last Name: {character.LastName} > ");
+                    character.LastName = GetUpdateCharacterProperty(character.LastName);
+                    DisplayPromptMessage($"First Name: {character.FirstName} > ");
+                    character.FirstName = GetUpdateCharacterProperty(character.FirstName);
+                    DisplayPromptMessage($"Address: {character.Address} >");
+                    character.Address = GetUpdateCharacterProperty(character.Address);
+                    DisplayPromptMessage($"City: {character.City} >");
+                    character.City = GetUpdateCharacterProperty(character.City);
+                    DisplayPromptMessage($"State: {character.State} >");
+                    character.State = GetUpdateCharacterProperty(character.State);
+                    DisplayPromptMessage($"Zip: {character.Zip} >");
+                    character.Zip = GetUpdateCharacterProperty(character.Zip);
+
+                    int age;
+                    DisplayPromptMessage($"Age: {character.Age} >");
+                    character.Age = GetInteger($"Age:", 1, 100, out age) ? age : character.Age;
+
+                    Character.GenderType gender;
+                    DisplayPromptMessage($"Gender [MALE, FEMALE]:"); ;
+                    while (!Enum.TryParse<Character.GenderType>(Console.ReadLine().ToUpper(), out gender))
+                    {
+                        DisplayMessage("Please use one of the following values [MALE, FEMALE]");
+                        DisplayPromptMessage($"Gender [MALE, FEMALE]:"); ;
+                    }
+                    character.Gender = gender;
+
+                    charactersBLL.UpdateCharacter(character, out success, out message);
                 }
             }
-            else
-            {
-                DisplayMessage(message);
-            }
+
+            DisplayReset();
+
+            DisplayMessage("");
+            Console.WriteLine(ConsoleUtil.Center("Update Character", WINDOW_WIDTH));
+            DisplayMessage("");
+            DisplayMessage(message);
 
             DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// capture the user response to update a character property
+        /// return the user response if non-empty else 
+        /// return the current property value
+        /// </summary>
+        /// <param name="currentPropertyValue">current property value</param>
+        /// <returns>new property or current value</returns>
+        private static string GetUpdateCharacterProperty(string currentPropertyValue)
+        {
+            string userResponse = Console.ReadLine();
+            return String.IsNullOrEmpty(userResponse) ? currentPropertyValue : userResponse;
         }
 
         /// <summary>
@@ -577,6 +631,7 @@ namespace Demo_FileIO
         private bool GetInteger(string prompt, int minimumValue, int maximumValue, out int integerChoice)
         {
             bool validResponse = false;
+            string userResponse;
             integerChoice = 0;
 
             //
@@ -587,33 +642,39 @@ namespace Demo_FileIO
             DisplayPromptMessage(prompt);
             while (!validResponse)
             {
-                if (int.TryParse(Console.ReadLine(), out integerChoice))
+                if (!String.IsNullOrEmpty(userResponse = Console.ReadLine()))
                 {
-                    if (validateRange)
+                    if (int.TryParse(userResponse, out integerChoice))
                     {
-                        if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                        if (validateRange)
                         {
-                            validResponse = true;
+                            if (integerChoice >= minimumValue && integerChoice <= maximumValue)
+                            {
+                                validResponse = true;
+                            }
+                            else
+                            {
+                                DisplayMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
+                                DisplayPromptMessage(prompt);
+                            }
                         }
                         else
                         {
-                            DisplayMessage($"You must enter an integer value between {minimumValue} and {maximumValue}. Please try again.");
-                            DisplayPromptMessage(prompt);
+                            validResponse = true;
                         }
                     }
                     else
                     {
-                        validResponse = true;
+                        DisplayMessage($"You must enter an integer value. Please try again.");
+                        DisplayPromptMessage(prompt);
                     }
                 }
                 else
                 {
-                    DisplayMessage($"You must enter an integer value. Please try again.");
-                    DisplayPromptMessage(prompt);
+                    return false;
                 }
-            }
 
-            Console.CursorVisible = false;
+            }
 
             return true;
         }

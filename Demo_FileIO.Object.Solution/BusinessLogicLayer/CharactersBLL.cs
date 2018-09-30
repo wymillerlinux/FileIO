@@ -101,9 +101,28 @@ namespace Demo_FileIO
             success = false;
             message = "";
 
-            _characters.RemoveAll(c => c.Id == character.Id);
-            _characters.Add(character);
-            _dataService.WriteAll(_characters);
+            //_characters.RemoveAll(c => c.Id == character.Id);
+            //_characters.Add(character);
+            //_dataService.WriteAll(_characters);
+
+            try
+            {
+                _dataService = new CsvDataService();
+                _characters = _dataService.ReadAll() as List<Character>;
+                _characters.RemoveAll(c => c.Id == character.Id);
+                _characters.Add(character);
+                _dataService.WriteAll(_characters);
+                success = true;
+                message = "Character updated.";
+            }
+            catch (FileNotFoundException)
+            {
+                message = "Unable to locate the data file.";
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+            }
         }
 
         public void DeleteCharacter(int id, out bool success, out string message)
