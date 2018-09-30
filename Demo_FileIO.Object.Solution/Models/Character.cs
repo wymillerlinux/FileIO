@@ -8,7 +8,7 @@ namespace Demo_FileIO
 {
     public class Character
     {
-        public enum GenderType { MALE, FEMALE }
+        public enum GenderType { NOTSPECIFIED, MALE, FEMALE }
 
         public int Id { get; set; }
         public string LastName { get; set; }

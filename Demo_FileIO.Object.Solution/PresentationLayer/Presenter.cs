@@ -254,11 +254,11 @@ namespace Demo_FileIO
             character.Age = GetInteger("Age:", 1, 100, out age) ? age : 0;
 
             Character.GenderType gender;
-            DisplayPromptMessage("Gender [MALE, FEMALE]:"); ;
+            DisplayPromptMessage("Gender [MALE, FEMALE, NOTSPECIFIED]:"); ;
             while (!Enum.TryParse<Character.GenderType>(Console.ReadLine().ToUpper(), out gender))
             {
-                DisplayMessage("Please use one of the following values [MALE, FEMALE]");
-                DisplayPromptMessage("Gender [MALE, FEMALE]:"); ;
+                DisplayMessage("Please use one of the following values [MALE, FEMALE, NOTSPECIFIED]");
+                DisplayPromptMessage("Gender [MALE, FEMALE, NOTSPECIFIED]:"); ;
             }
             character.Gender = gender;
 
@@ -374,13 +374,19 @@ namespace Demo_FileIO
                     character.Age = GetInteger($"Age:", 1, 100, out age) ? age : character.Age;
 
                     Character.GenderType gender;
-                    DisplayPromptMessage($"Gender [MALE, FEMALE]:"); ;
-                    while (!Enum.TryParse<Character.GenderType>(Console.ReadLine().ToUpper(), out gender))
+                    DisplayPromptMessage($"Gender [MALE, FEMALE, NOTSPECIFIED]: {character.Gender} >");
+                    userResponse = Console.ReadLine().ToUpper();
+                    if (!String.IsNullOrEmpty(userResponse))
                     {
-                        DisplayMessage("Please use one of the following values [MALE, FEMALE]");
-                        DisplayPromptMessage($"Gender [MALE, FEMALE]:"); ;
+                        while (!Enum.TryParse<Character.GenderType>(userResponse, out gender))
+                        {
+                            DisplayMessage("Please use one of the following values [MALE, FEMALE, NOTSPECIFIED]");
+                            DisplayPromptMessage($"Gender [MALE, FEMALE, NOTSPECIFIED]:");
+                            userResponse = Console.ReadLine().ToUpper();
+                        }
+
+                        character.Gender = gender;
                     }
-                    character.Gender = gender;
 
                     charactersBLL.UpdateCharacter(character, out success, out message);
                 }
@@ -445,6 +451,8 @@ namespace Demo_FileIO
             columnHeader.Append("Full Name".PadRight(25));
 
             DisplayMessage(columnHeader.ToString());
+
+            characters = characters.OrderBy(c => c.Id).ToList();
 
             foreach (Character character in characters)
             {
