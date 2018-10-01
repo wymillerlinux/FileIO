@@ -65,6 +65,10 @@ namespace Demo_FileIO
             DisplayClosingScreen();
         }
 
+        /// <summary>
+        /// display the main menu and get the user's choice
+        /// </summary>
+        /// <returns>user action</returns>
         private UserAction DisplayGetUserAction()
         {
             UserAction userActionChoice = UserAction.None;
@@ -116,6 +120,10 @@ namespace Demo_FileIO
             return userActionChoice;
         }
 
+        /// <summary>
+        /// process the user's choice from the main menu
+        /// </summary>
+        /// <param name="userActionChoice"></param>
         private void ProcessUserAction(UserAction userActionChoice)
         {
             switch (userActionChoice)
@@ -521,7 +529,6 @@ namespace Demo_FileIO
 
             Console.CursorVisible = true;
         }
-
 
         /// <summary>
         /// display the Exit prompt
