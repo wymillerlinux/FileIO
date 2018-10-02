@@ -68,7 +68,6 @@ namespace Demo_FileIO
         static void StructuredTextReadWrite(string dataFile)
         {
             string dataString;
-            string dataFileContents = "";
 
             // initialize a string with all of the addresses
             dataString = BuildDataString();
