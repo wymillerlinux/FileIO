@@ -9,6 +9,10 @@ namespace Demo_FileIO
 {
     class Program
     {
+        /// <summary>
+        /// main method
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             string textFilePath = @"Data\Data.txt";
