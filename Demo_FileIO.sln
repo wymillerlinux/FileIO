@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_FileIO.SimpleText", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_FileIO.Object", "Demo_FileIO.Object\Demo_FileIO.Object.csproj", "{E0A964F6-757A-47F2-8E87-B439713FF9FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_FileIO_NTier.Solution", "Demo_FileIO_NTier.Solution\Demo_FileIO_NTier.Solution.csproj", "{E5DA498E-39BF-4B07-AAD6-F03835E2D0AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_FileIO_NTier.Starter", "Demo_FileIO_NTier.Starter\Demo_FileIO_NTier.Starter.csproj", "{A82307CD-4D8F-40C5-9DA7-8DE52EA510B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{E0A964F6-757A-47F2-8E87-B439713FF9FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0A964F6-757A-47F2-8E87-B439713FF9FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0A964F6-757A-47F2-8E87-B439713FF9FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5DA498E-39BF-4B07-AAD6-F03835E2D0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5DA498E-39BF-4B07-AAD6-F03835E2D0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5DA498E-39BF-4B07-AAD6-F03835E2D0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5DA498E-39BF-4B07-AAD6-F03835E2D0AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82307CD-4D8F-40C5-9DA7-8DE52EA510B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82307CD-4D8F-40C5-9DA7-8DE52EA510B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82307CD-4D8F-40C5-9DA7-8DE52EA510B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82307CD-4D8F-40C5-9DA7-8DE52EA510B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
