@@ -76,6 +76,10 @@ namespace Demo_FileIO_NTier.PresentationLayer
             }
         }
 
+        /// <summary>
+        /// display page header
+        /// </summary>
+        /// <param name="headerText">text for header</param>
         static void DisplayHeader(string headerText)
         {
             Console.Clear();
@@ -84,6 +88,9 @@ namespace Demo_FileIO_NTier.PresentationLayer
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// display continue prompt
+        /// </summary>
         static void DisplayContinuePrompt()
         {
             Console.WriteLine();
@@ -91,6 +98,9 @@ namespace Demo_FileIO_NTier.PresentationLayer
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// display Welcome Screen
+        /// </summary>
         static void DisplayWelcomeScreen()
         {
             Console.Clear();
@@ -100,6 +110,9 @@ namespace Demo_FileIO_NTier.PresentationLayer
             DisplayContinuePrompt();
         }
 
+        /// <summary>
+        /// Display Closing Screen
+        /// </summary>
         static void DisplayClosingScreen()
         {
             Console.Clear();

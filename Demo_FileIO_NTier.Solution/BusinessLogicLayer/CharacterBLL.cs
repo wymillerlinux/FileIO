@@ -19,6 +19,12 @@ namespace Demo_FileIO_NTier.BusinessLogicLayer
             _dataService = dataservice;
         }
 
+        /// <summary>
+        /// get IEnumberable of all characters sorted by Id
+        /// </summary>
+        /// <param name="success">operation status</param>
+        /// <param name="message">error message</param>
+        /// <returns></returns>
         public IEnumerable<Character> GetCharacters(out bool success, out string message)
         {
             _characters = null;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_NTierCRUD
+namespace Demo_FileIO_NTier
 {
     public static class DataSettings
     {
