@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessLayer\CsvDataService.cs" />
+    <Compile Include="DataAccessLayer\IDataService.cs" />
     <Compile Include="Data\DataSettings.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Program.cs" />
