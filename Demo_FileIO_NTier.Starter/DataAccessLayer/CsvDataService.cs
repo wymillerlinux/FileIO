@@ -16,7 +16,7 @@ namespace Demo_FileIO_NTier.DataAccessLayer
         }
         
         /// <summary>
-        /// Read all the items for a CSV file
+        /// Read all items from CSV file
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Character> ReadAll()
@@ -51,7 +51,10 @@ namespace Demo_FileIO_NTier.DataAccessLayer
 
         }
 
-
+        /// <summary>
+        /// Write all items to CSV file
+        /// </summary>
+        /// <param name="character"></param>
         public void WriteAll(IEnumerable<Character> character)
         {
             
@@ -111,9 +114,8 @@ namespace Demo_FileIO_NTier.DataAccessLayer
         private string CharacterStringBuilder(Character characterObject)
         {
             const char DELINEATOR = ',';
-            string characterString;
 
-            characterString =
+            string characterString =
                 characterObject.Id + DELINEATOR +
                 characterObject.LastName + DELINEATOR +
                 characterObject.FirstName + DELINEATOR +

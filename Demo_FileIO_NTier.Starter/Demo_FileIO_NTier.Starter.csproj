@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogicLayer\CharacterBLL.cs" />
     <Compile Include="DataAccessLayer\CsvDataService.cs" />
     <Compile Include="DataAccessLayer\IDataService.cs" />
     <Compile Include="Data\DataSettings.cs" />
