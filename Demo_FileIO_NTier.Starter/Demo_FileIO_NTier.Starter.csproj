@@ -47,6 +47,7 @@
     <Compile Include="DataAccessLayer\IDataService.cs" />
     <Compile Include="Data\DataSettings.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="PresentationLayer\Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

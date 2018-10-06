@@ -21,7 +21,13 @@ namespace Demo_FileIO_NTier.BusinessLogicLayer
         {
             _dataService = dataService;
         }
-
+        
+        /// <summary>
+        /// Returns IEnumerable of character if the character count is over zero.
+        /// </summary>
+        /// <param name="success"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public IEnumerable<Character> GetCharacters(out bool success, out string message)
         {
             _character = null;
@@ -40,17 +46,17 @@ namespace Demo_FileIO_NTier.BusinessLogicLayer
                 }
                 else
                 {
-                    message = "No data. Is the file empty? ¯\\_(ツ)_/¯";
+                    message = "No data. Is the file empty?";
                 }
             }
             catch (FileNotFoundException)
             {
-                message = "The file is not found. Does the file exist? ¯\\_(ツ)_/¯";
+                message = "The file is not found. Does the file exist?";
             }
             // added additional catch statement in case the cast does not work as intended
             catch (InvalidCastException)
             {
-                message = "Operation cannot be casted";
+                message = "Operation cannot be casted.";
             }
             catch (Exception e)
             {
