@@ -1,0 +1,11 @@
+<Characters attribute="Characters">
+    <Id>1</Id>
+    <LastName>Flintstone</LastName>
+    <FirstName>Fred</FirstName>
+    <Address>301 Cobblestone Way</Address>
+    <City>Bedrock</City>
+    <State>MI</State>
+    <Zip>70777</Zip>
+    <Age>32</Age>
+    <Gender>MALE</Gender>
+</Characters>

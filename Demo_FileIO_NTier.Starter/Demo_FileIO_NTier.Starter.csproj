@@ -45,6 +45,7 @@
     <Compile Include="BusinessLogicLayer\CharacterBLL.cs" />
     <Compile Include="DataAccessLayer\CsvDataService.cs" />
     <Compile Include="DataAccessLayer\IDataService.cs" />
+    <Compile Include="DataAccessLayer\XmlDataService.cs" />
     <Compile Include="Data\DataSettings.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="PresentationLayer\Presenter.cs" />
@@ -53,12 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Data\Data.csv" />
+    <None Include="Data\Data.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BusinessLogicLayer\" />
-    <Folder Include="DataAccessLayer\" />
-    <Folder Include="PresentationLayer\" />
+    <None Include="Data\Data.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
