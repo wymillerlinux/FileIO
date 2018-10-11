@@ -56,6 +56,7 @@ namespace Demo_FileIO_NTier.DataAccessLayer
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
@@ -65,9 +66,9 @@ namespace Demo_FileIO_NTier.DataAccessLayer
 
         }
 
-        public XmlDataService(string dataFile)
+        public XmlDataService(string datafile)
         {
-            _dataFilePath = dataFile;
+            _dataFilePath = datafile;
         }
     }
 }
