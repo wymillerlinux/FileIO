@@ -10,7 +10,7 @@ namespace Demo_FileIO_NTier
         {
             IDataService dataService = new CsvDataService();
             //IDataService dataService = new XmlDataService(DataSettings.dataFilePath);
-            //IDataService dataService = (IDataService)new JsonDataService(DataSettings.dataFilePath);
+            //IDataService dataService = new JsonDataService(DataSettings.dataFilePath);
             CharacterBLL characterBll = new CharacterBLL(dataService);
             Presenter presenter = new Presenter(characterBll);
         }

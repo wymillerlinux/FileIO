@@ -10,7 +10,7 @@ using Demo_FileIO_NTier.DataAccessLayer;
 
 namespace Demo_FileIO_NTier.DataAccessLayer
 {
-    public class JsonDataService
+    public class JsonDataService : IDataService
     {
         private string _dataFilePath;
 
