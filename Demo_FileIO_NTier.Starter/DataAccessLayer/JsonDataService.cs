@@ -14,6 +14,10 @@ namespace Demo_FileIO_NTier.DataAccessLayer
     {
         private string _dataFilePath;
 
+        /// <summary>
+        /// reads all the things from the json string/data
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Character> ReadAll()
         {
             List<Character> character = new List<Character>();
@@ -37,9 +41,37 @@ namespace Demo_FileIO_NTier.DataAccessLayer
             return character;
         }
 
+
         public void WriteAll(IEnumerable<Character> characters)
         {
-            
+            RootObject rootObject = new RootObject();
+            rootObject.Characters = new Characters();
+            rootObject.Characters.Character = characters as List<Character>;
+
+            string jsonString = JsonConvert.SerializeObject(rootObject);
+
+            try
+            {
+                StreamWriter writer = new StreamWriter(_dataFilePath);
+                using (writer)
+                {
+                    writer.WriteLine(jsonString);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public JsonDataService()
+        {
+            _dataFilePath = DataSettings.dataFilePath;
+        }
+
+        public JsonDataService(string dataFile)
+        {
+            _dataFilePath = dataFile;
         }
     }
 }
