@@ -37,7 +37,7 @@ namespace Demo_FileIO_NTier.BusinessLogicLayer
             try
             {
                 //_dataService = new CsvDataService();
-                _dataService = new XmlDataService(DataSettings.dataFilePath);
+                //_dataService = new XmlDataService(DataSettings.dataFilePath);
                 _character = _dataService.ReadAll() as List<Character>;
                 _character.OrderBy(c => c.Id);
 

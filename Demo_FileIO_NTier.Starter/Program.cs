@@ -8,9 +8,9 @@ namespace Demo_FileIO_NTier
     {
         static void Main(string[] args)
         {
-            IDataService dataService = new CsvDataService();
+            //IDataService dataService = new XmlDataService();
             //IDataService dataService = new XmlDataService(DataSettings.dataFilePath);
-            //IDataService dataService = new JsonDataService();
+            IDataService dataService = new JsonDataService(DataSettings.dataFilePath);
             CharacterBLL characterBll = new CharacterBLL(dataService);
             Presenter presenter = new Presenter(characterBll);
         }
